@@ -11,6 +11,12 @@ export const sendEmail = async ({
   if (!apiKey || !senderEmail || !senderName) {
     throw new Error("Missing Brevo configuration");
   }
+  console.log("Brevo config check:", {
+    keyExists: Boolean(apiKey),
+    keyLength: apiKey?.length,
+    keyPrefix: apiKey?.slice(0, 8),
+    senderEmail,
+  });
 
   const response = await fetch(
     "https://api.brevo.com/v3/smtp/email",
