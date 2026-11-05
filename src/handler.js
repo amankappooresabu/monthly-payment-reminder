@@ -2,6 +2,7 @@ import "dotenv/config";
 import { sendEmail } from "./services/brevo.js";
 import { generateUpiLink } from "./utils/upi.js";
 import { config } from "../config/env.config.js";
+import { reminderEmailTemplate } from "./templates/reminderEmail.js";
 
 const recipients = config.recipients;
 
@@ -18,17 +19,11 @@ export const handler = async () => {
       const paymentLink = generateUpiLink(recipient.amount);
       const subject = "Monthly Spotify Payment Reminder";
 
-      const htmlContent = `
-  <p>Hi ${recipient.name},</p>
-
-  <p>Your monthly Spotify Family payment is due.</p>
-
-  <p>
-    <a href="${paymentLink}">Pay via UPI</a>
-  </p>
-
-  <p>Thanks!</p>
-`;
+      const htmlContent = reminderEmailTemplate({
+        name: recipient.name,
+        amount: recipient.amount,
+        paymentLink,
+      });
 
       return sendEmail({
         to: {
