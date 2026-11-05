@@ -29,7 +29,8 @@ jobs:
       - name: Package Lambda
         run: |
           zip -r function.zip src config node_modules package.json package-lock.json
-
+      - name: Debug OIDC claims
+        uses: github/actions-oidc-debugger@v1
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
