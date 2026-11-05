@@ -1,2 +1,2 @@
-config/recipients.js
 .env
+node_modules

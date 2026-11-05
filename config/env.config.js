@@ -6,4 +6,5 @@ export const config = {
     },
 
     upiId: process.env.UPI_ID,
+    recipients: JSON.parse(process.env.RECIPIENTS_CONFIG || "[]"),
   };

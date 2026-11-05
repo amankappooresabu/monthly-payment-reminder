@@ -1,6 +1,9 @@
-import { recipients } from "../config/recipients.js";
+import "dotenv/config";
 import { sendEmail } from "./services/brevo.js";
 import { generateUpiLink } from "./utils/upi.js";
+import { config } from "../config/env.config.js";
+
+const recipients = config.recipients;
 
 export const handler = async () => {
   console.log("Starting monthly payment reminders");
@@ -9,10 +12,10 @@ export const handler = async () => {
     (recipient) => recipient.active !== false
   );
 
-  const paymentLink = generateUpiLink(recipient.amount);
 
   const results = await Promise.allSettled(
     activeRecipients.map(async (recipient) => {
+      const paymentLink = generateUpiLink(recipient.amount);
       const subject = "Monthly Spotify Payment Reminder";
 
       const htmlContent = `

@@ -1,5 +1,5 @@
 
-import { config } from "../../config/env.config";
+import { config } from "../../config/env.config.js";
 
 export const sendEmail = async ({
   to,
