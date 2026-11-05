@@ -1,4 +1,4 @@
-import { config } from "../../env/config.js";
+import { config } from "../../config/env.config.js";
 
 export const generateUpiLink = (amount, note = "Spotify Family Payment") => {
   const params = new URLSearchParams({
